@@ -14,6 +14,7 @@ public class GrafoDirigidoPonderado {
         this.lineas = new HashMap<>();
     }
 
+    /**Imprime en consola las instrucciones de como llegar desde inicio hasta fin*/
     void printCaminoMasCorto(int inicio, int fin) {
         System.out.println();
         if (inicio == fin) {
@@ -175,73 +176,6 @@ public class GrafoDirigidoPonderado {
         return listaAdyacencia.getOrDefault(vertice, new ArrayList<>());
     }
 
-    private void agregarLinea(String nombreLinea, List<Integer> paradas) {
-        lineas.put(nombreLinea, new ArrayList<>(paradas));
-    }
-
-    public void imprimirConexiones() {
-        System.out.println("\nConexiones:");
-        for (Map.Entry<Integer, List<Arco>> entrada : listaAdyacencia.entrySet()) {
-            System.out.println("Parada " + entrada.getKey() + " -> " + entrada.getValue());
-        }
-    }
-
-    public void imprimirLineas() {
-        System.out.println("\nLíneas:");
-        for (Map.Entry<String, List<Integer>> linea : lineas.entrySet()) {
-            System.out.println(linea.getKey() + ": " + linea.getValue());
-        }
-    }
-
-    // Método para cargar datos desde un archivo .txt
-    public void cargarDesdeArchivo(String rutaArchivo) throws IOException {
-        try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
-            String linea;
-            boolean esSeccionConexiones = false;
-            boolean esSeccionLineas = false;
-
-            while ((linea = br.readLine()) != null) {
-                linea = linea.trim();
-                if (linea.isEmpty() || linea.startsWith("#")) {
-                    // Saltar líneas vacías o comentarios
-                    continue;
-                }
-
-                if (linea.equalsIgnoreCase("CONEXIONES")) {
-                    esSeccionConexiones = true;
-                    esSeccionLineas = false;
-                    continue;
-                }
-
-                if (linea.equalsIgnoreCase("LINEAS")) {
-                    esSeccionLineas = true;
-                    esSeccionConexiones = false;
-                    continue;
-                }
-
-                if (esSeccionConexiones) {
-                    String[] partes = linea.split(",");
-                    if (partes.length == 3) {
-                        int origen = Integer.parseInt(partes[0]);
-                        int destino = Integer.parseInt(partes[1]);
-                        int peso = Integer.parseInt(partes[2]);
-                        agregarArco(origen, destino, peso);
-                    }
-                } else if (esSeccionLineas) {
-                    String[] partes = linea.split(":");
-                    if (partes.length == 2) {
-                        String nombreLinea = partes[0];
-                        List<Integer> paradas = new ArrayList<>();
-                        for (String parada : partes[1].split(",")) {
-                            paradas.add(Integer.parseInt(parada));
-                            agregarVertice(Integer.parseInt(parada));
-                        }
-                        agregarLinea(nombreLinea, paradas);
-                    }
-                }
-            }
-        }
-    }
 
     // Clase interna para las aristas
     static class Arco {
