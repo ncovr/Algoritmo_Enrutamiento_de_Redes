@@ -1,6 +1,4 @@
-package Sistema;
-
-import java.util.ArrayList;
+package Sistema.EstructuraGrafo;
 
 /**Representa a un nodo en terminos del grafo*/
 public class Parada {
@@ -10,12 +8,8 @@ public class Parada {
         this.id = v;
     }
 
-    int getId() {
+    public int getId() {
         return id;
-    }
-
-    void setId(int id) {
-        this.id = id;
     }
 
     @Override

@@ -1,4 +1,6 @@
-package Sistema;
+package Sistema.Test;
+
+import Sistema.EstructuraGrafo.*;
 
 import java.io.IOException;
 

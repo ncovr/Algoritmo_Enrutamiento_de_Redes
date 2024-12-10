@@ -1,4 +1,4 @@
-package Sistema;
+package Sistema.EstructuraGrafo;
 
 import java.util.ArrayList;
 
