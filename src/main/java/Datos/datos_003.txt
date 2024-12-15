@@ -9,15 +9,3 @@
 # Arista1: inicio,llegada,peso
 # Arista2: inicio,llegada,peso
 
-L1
-1,2,3
-2,3,4
-
-L2
-4,2,8
-2,5,1
-5,6,2
-
-L3
-7,6,4
-6,8,6

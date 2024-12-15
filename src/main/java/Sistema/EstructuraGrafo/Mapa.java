@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.*;
 
 public class Mapa extends Operaciones {
-    ArrayList<Linea> grafo = new ArrayList<>();
+   private ArrayList<Linea> grafo = new ArrayList<>();
 
     public Mapa(){}
 
@@ -45,6 +45,10 @@ public class Mapa extends Operaciones {
     /**Imprime la lista de adyacencia de un grafo*/
     public void display() {
         toDisplay(grafo);
+    }
+
+    public boolean isEmpty(){
+        return grafo.isEmpty();
     }
 
     ArrayList<Linea> getGrafo() {

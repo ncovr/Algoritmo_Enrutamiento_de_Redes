@@ -29,7 +29,7 @@ public abstract class Operaciones {
         distancias.put(inicio, 0);
         pq.add(new Nodo(inicio, 0));
 
-        // Aqui se procesan los nodos
+        // Aqui se procesan los nodos usando Dijkstra
         while (!pq.isEmpty()) {
             Nodo actual = pq.poll(); // Se extrae el nodo de la cola de prioridad
             int valorActual = actual.id; // Se captura el valor del nodo que se está procesando
@@ -58,37 +58,36 @@ public abstract class Operaciones {
             }
         }
 
-        // Si no se puede llegar al destino
+        // Si no se puede llegar desde inicio hasta destino
         if (!predecesores.containsKey(destino)) {
             System.out.println("No hay camino desde " + inicio + " hasta " + destino);
             return;
         }
 
-        // Reconstrucción del camino más corto
-        LinkedList<Arco> camino = new LinkedList<>();
-        for (Integer at = destino; predecesores.containsKey(at); at = predecesores.get(at).getI().getId()) {
-            camino.addFirst(predecesores.get(at));
-        }
+        // A partir de aqui se imprimen las indicaciones para llegar hasta destino desde inicio
+        LinkedList<Arco> camino = new LinkedList<>(); // Almacena secuencialmente los nodos del recorrido de inicio a destino
+        // for: recorre la lista de predecesores va añadiendo los arcos de los predecesores obtenidos con Dijkstra
+        for (Integer actual = destino; predecesores.containsKey(actual); actual = predecesores.get(actual).getI().getId())
+            camino.addFirst(predecesores.get(actual));
 
+        // Comienza a comunicar indicaciones
         System.out.println("Camino más corto desde " + inicio + " hasta " + destino + ":");
         String lineaActual = null;
 
         for (int i = 0; i < camino.size(); i++) {
-            Arco arco = camino.get(i);
-
-            if (!arco.getLinea().getNombre().equals(lineaActual)) {
-                // Cambio de línea o primera línea
+            Arco arco = camino.get(i); // Recupera el arco de la posición i
+            if (!arco.getLinea().getNombre().equals(lineaActual)) { // Si el arco recuperado es de una linea distinta
+                // de la que se ha ido procesando, se cambia de línea
                 System.out.println("Tomar línea " + arco.getLinea().getNombre() +
                         " desde la parada " + arco.getI().getId() +
                         " hasta la parada " + arco.getF().getId());
-                lineaActual = arco.getLinea().getNombre();
+                lineaActual = arco.getLinea().getNombre(); // Se recupera la primera línea del arco
             } else {
-                // Continuar en la misma línea
+                // Se continúa en la misma línea
                 System.out.println("Continuar hasta la parada " + arco.getF().getId());
             }
         }
         System.out.println("Tiempo total: " + distancias.get(destino) + " minutos");
-
     }
 
     /**

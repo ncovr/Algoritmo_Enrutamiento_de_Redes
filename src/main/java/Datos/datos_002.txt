@@ -1,8 +1,13 @@
 # No se permiten pesos menor a 1
 # Formato:
-# Nombre de la linea
+
+# Nombre de la linea // Solo nombre. Por ejemplo: "L1", en vez de "Linea L1"
 # Arista1: parada de inicio (int), parada de llegada (int), peso (minutos) (int)
 # Arista2...
+
+# Nombre de la linea 2
+# Arista1: inicio,llegada,peso
+# Arista2: inicio,llegada,peso
 
 A
 1,4,5
