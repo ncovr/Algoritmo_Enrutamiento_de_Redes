@@ -1,9 +1,12 @@
+// Desarrollado por:
+// Nicolás Verdugo Barrera
+// Rocío Gaete Orellana
+
 package Sistema.Test;
-
 import Sistema.EstructuraGrafo.*;
-
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Main {
@@ -19,10 +22,15 @@ public class Main {
         if (!carpeta.exists() || !carpeta.isDirectory()) {
             System.out.println("Cree un archivo dentro de la carpeta Datos, ingrese datos y ejecute nuevamente el sistema");
         }
+        if (archivos.length == 0) {
+            System.out.println("ERROR: NO HAY ARCHIVOS .txt PRESENTES EN LA CARPETA");
+            System.out.println("CONSEJO: CREE UN ARCHIVO Y RELLÉNELO CON DATOS RELEVANTES");
+            System.exit(0);
+        }
         System.out.println("Seleccione el archivo generador");
-        for (int i = 0; i < archivos.length; i++) {
-            if (archivos[i].getName().endsWith(".txt")) {
-                mensaje2("-> "+archivos[i].getName(),400);
+        for (File archivo : archivos) {
+            if (archivo.getName().endsWith(".txt")) {
+                mensaje2("-> " + archivo.getName(), 400);
             }
 
         }
